@@ -35,169 +35,168 @@ Ai.prototype.play = function (chessboard) {
 
         //计算我方最高分的第一步
         var matrix = chessboard.getMatrix();
-        var calculate = function (matrix, color) {
-            var shrink = matrix.shrink();
-            var i, j;
-            var me = matrix.copy(color == 'black');
-            var temp;
-            var myScore = 0;
-            var myFinalScore = 0;
-            var myBestScore = 0;
-            var myFinalCoordinate;
-            var myBestCoordinate;
-            var you = matrix.copy(color !== 'black');
-            var yourScore = 0;
-            //放哪一点
-            //1.我的分数最高
-            var myHighestScore = 0;
-            var myHighestCoordinate = [0, 0];
-            //2.你的分数最低
-            var yourLowestScore = 1000000;
-            var yourLowestCoordinate = [0, 0];
-            //3.(我的分数 - 你的分数) 最高
-            var myMinusHighestScore = 0;
-            var myMinusHighestCoordinate = [0, 0];
-            //4.你的分数 - 我的分数 最高
-            //5.我的最高分的坐标
-            var myWinCoordinate = [];
-            //6.你的最高分坐标
-            var yourWinCoordinate = [];
-            //7.我差一步胜利的点
-            var myMustWinCoordinate = [];
-            var myAlmostWinCoordinate = [];
-            //8.对方差一步胜利的点
-            var yourAlmostWinCoordinate = [];
-            //9.对方必须应对的点
-            var yourMustCareCoordinate = [];
+        var shrink = matrix.shrink();
+        var i, j;
+        var me = matrix.copy(this.color == 'black');
+        var temp;
+        var myScore = 0;
+        var myFinalScore = 0;
+        var myBestScore = 0;
+        var myFinalCoordinate;
+        var myBestCoordinate;
+        var you = matrix.copy(this.color !== 'black');
+        var yourScore = 0;
+        //放哪一点
+        //1.我的分数最高
+        var myHighestScore = 0;
+        var myHighestCoordinate = [0, 0];
+        //2.你的分数最低
+        var yourLowestScore = 1000000;
+        var yourLowestCoordinate = [0, 0];
+        //3.(我的分数 - 你的分数) 最高
+        var myMinusHighestScore = 0;
+        var myMinusHighestCoordinate = [0, 0];
+        //4.你的分数 - 我的分数 最高
+        //5.我的最高分的坐标
+        var myWinCoordinate = [];
+        //6.你的最高分坐标
+        var yourWinCoordinate = [];
+        //7.我差一步胜利的点
+        var myMustWinCoordinate = [];
+        var myAlmostWinCoordinate = [];
+        //8.对方差一步胜利的点
+        var yourAlmostWinCoordinate = [];
+        //9.对方必须应对的点
+        var yourMustCareCoordinate = [];
 
-
-            console.log(shrink);
-            for (i = shrink[0][0]; i < shrink[0][1]; i++) {
-                for (j = shrink[1][0]; j < shrink[1][1]; j++) {
-                    temp = me.getValueByCoordinate([i, j]);
-                    myScore = 0;
-                    yourScore = 0;
-                    if (temp === 0) {
-                        me.setValueByCoordinate([i, j], 1);
-                        you.setValueByCoordinate([i, j], 3);
-                        schemas.forEach(function (schema) {
-                            var mySchema = me.findSchema(schema['schema']);
-                            var yourSchema = you.findSchema(schema['schema']);
-                            myScore += mySchema.length * schema['score'];
-                            yourScore += yourSchema.length * schema['score'];
-                            if (schema['score'] > 100000) {
-                                //检查我的胜利点
-                                if (mySchema.length > 0) {
-                                    myWinCoordinate.push([i, j]);
-                                }
-                            } else if (schema['score'] > 10000) {
-                                //检查我的必胜点
-                                if (mySchema.length > 0) {
-                                    myMustWinCoordinate.push([i, j]);
-                                }
-                            } else if (schema['score'] > 2000) {
-                                //检查我的差一步胜利
-                                if (mySchema.length > 0) {
-                                    myAlmostWinCoordinate.push([i, j]);
-                                }
+        for (i = shrink[0][0]; i < shrink[0][1]; i++) {
+            for (j = shrink[1][0]; j < shrink[1][1]; j++) {
+                temp = me.getValueByCoordinate([i, j]);
+                myScore = 0;
+                yourScore = 0;
+                if (temp === 0) {
+                    me.setValueByCoordinate([i, j], 1);
+                    you.setValueByCoordinate([i, j], 3);
+                    schemas.forEach(function (schema) {
+                        var mySchema = me.findSchema(schema['schema']);
+                        var yourSchema = you.findSchema(schema['schema']);
+                        myScore += mySchema.length * schema['score'];
+                        yourScore += yourSchema.length * schema['score'];
+                        if (schema['score'] > 100000) {
+                            //检查我的胜利点
+                            if (mySchema.length > 0) {
+                                myWinCoordinate.push([i, j]);
                             }
-                        });
-                        me.setValueByCoordinate([i, j], 0);
-                        you.setValueByCoordinate([i, j], 0);
-                        //我的得分已经计算
-                        //计算对方得分
-                        if (myScore - yourScore > myFinalScore) {
-                            myFinalScore = myScore - yourScore;
-                            myFinalCoordinate = [i, j];
+                        } else if (schema['score'] > 10000) {
+                            //检查我的必胜点
+                            if (mySchema.length > 0) {
+                                myMustWinCoordinate.push([i, j]);
+                            }
+                        } else if (schema['score'] > 2000) {
+                            //检查我的差一步胜利
+                            if (mySchema.length > 0) {
+                                myAlmostWinCoordinate.push([i, j]);
+                            }
                         }
-                        if (myScore > myBestScore) {
-                            myBestScore = myScore;
-                            myBestCoordinate = [i, j];
-                        }
-                        //计算我的最高分
-                        if (myScore > myHighestScore) {
-                            myHighestScore = myScore;
-                            myHighestCoordinate = [i, j];
-                        }
-                        //计算你的最低分
-                        if (yourScore < yourLowestScore) {
-                            yourLowestScore = yourScore;
-                            yourLowestCoordinate = [i, j];
-                        }
-                        //计算我的分数 - 你的分数 最高分
-                        if (myScore - yourScore > myMinusHighestScore) {
-                            myMinusHighestScore = myScore - yourScore;
-                            myMinusHighestCoordinate = [i, j];
-                        }
+                    });
+                    me.setValueByCoordinate([i, j], 0);
+                    you.setValueByCoordinate([i, j], 0);
+                    //我的得分已经计算
+                    //计算对方得分
+                    if (myScore - yourScore > myFinalScore) {
+                        myFinalScore = myScore - yourScore;
+                        myFinalCoordinate = [i, j];
+                    }
+                    if (myScore > myBestScore) {
+                        myBestScore = myScore;
+                        myBestCoordinate = [i, j];
+                    }
+                    //计算我的最高分
+                    if (myScore > myHighestScore) {
+                        myHighestScore = myScore;
+                        myHighestCoordinate = [i, j];
+                    }
+                    //计算你的最低分
+                    if (yourScore < yourLowestScore) {
+                        yourLowestScore = yourScore;
+                        yourLowestCoordinate = [i, j];
+                    }
+                    //计算我的分数 - 你的分数 最高分
+                    if (myScore - yourScore > myMinusHighestScore) {
+                        myMinusHighestScore = myScore - yourScore;
+                        myMinusHighestCoordinate = [i, j];
                     }
                 }
             }
-            //分析一下
-            myScore = 0;
-            yourScore = 0;
-            schemas.forEach(function (schema) {
-                myScore += me.findSchema(schema['schema']).length * schema['score'];
-                yourScore += you.findSchema(schema['schema']).length * schema['score'];
-            });
-            console.log('当前局面 myScore', myScore);
-            console.log('当前局面 yourScore', yourScore);
-            console.log('myHighestScore', myHighestScore, myHighestCoordinate, chessboard.getDomByCoordinate(myHighestCoordinate));
-            console.log('yourLowestScore', yourLowestScore, yourLowestCoordinate, chessboard.getDomByCoordinate(yourLowestCoordinate));
-            console.log('myMinusHighestScore', myMinusHighestScore, myMinusHighestCoordinate, chessboard.getDomByCoordinate(myMinusHighestCoordinate));
-            console.log('myWinCoordinate', myWinCoordinate);
-            console.log('myAlmostWinCoordinate', myAlmostWinCoordinate);
-            console.log('yourWinCoordinate', yourWinCoordinate);
-            //分析结束
+        }
+        //分析一下
+        myScore = 0;
+        yourScore = 0;
+        schemas.forEach(function (schema) {
+            myScore += me.findSchema(schema['schema']).length * schema['score'];
+            yourScore += you.findSchema(schema['schema']).length * schema['score'];
+        });
+        console.log('当前局面 myScore', myScore);
+        console.log('当前局面 yourScore', yourScore);
+        console.log('myHighestScore', myHighestScore, myHighestCoordinate, chessboard.getDomByCoordinate(myHighestCoordinate));
+        console.log('yourLowestScore', yourLowestScore, yourLowestCoordinate, chessboard.getDomByCoordinate(yourLowestCoordinate));
+        console.log('myMinusHighestScore', myMinusHighestScore, myMinusHighestCoordinate, chessboard.getDomByCoordinate(myMinusHighestCoordinate));
+        console.log('myWinCoordinate', myWinCoordinate);
+        console.log('myAlmostWinCoordinate', myAlmostWinCoordinate);
+        console.log('yourWinCoordinate', yourWinCoordinate);
+        //分析结束
 
-            yourScore = 0;
-            schemas.forEach(function (schema) {
-                var find = you.findSchema(schema['schema']);
-                yourScore += find.length * schema['score'];
-                if (schema['score'] > 100000) {
-                    //检查我的胜利点
-                    if (find.length > 0) {
-                        yourWinCoordinate.push(find);
-                    }
-                } else if (schema['score'] > 2000) {
-                    //检查我的差一步胜利
-                    if (find.length > 0) {
-                        yourAlmostWinCoordinate.push(find);
-                    }
-                } else if (schema['score'] > 1000) {
-                    if (find.length > 0) {
-                        yourMustCareCoordinate.push(find);
-                    }
+        yourScore = 0;
+        schemas.forEach(function (schema) {
+            var find = you.findSchema(schema['schema']);
+            yourScore += find.length * schema['score'];
+            if (schema['score'] > 100000) {
+                //检查我的胜利点
+                if (find.length > 0) {
+                    yourWinCoordinate.push(find);
                 }
-            });
-            if (myWinCoordinate.length > 0) {
-                console.log('choose my win');
-                myFinalCoordinate = myWinCoordinate[0];
-            } else if (yourAlmostWinCoordinate.length > 0) {
-                console.log('choose your almost');
-                myFinalCoordinate = yourLowestCoordinate;
-            } else if (myMustWinCoordinate.length > 0) {
-                console.log('choose my must win');
-                myFinalCoordinate = myMustWinCoordinate[0];
-            } else if (myAlmostWinCoordinate.length > 0) {
-                console.log('choose my almost');
-                myFinalCoordinate = myHighestCoordinate;
-            } else if (yourMustCareCoordinate.length > 0) {
-                console.log('choose your muse care');
-                myFinalCoordinate = yourLowestCoordinate;
-            } else if (myMinusHighestScore == 0) {
-                console.log('choose my best');
-                myFinalCoordinate = myBestCoordinate;
-            } else {
-                console.log('choose my minus');
-                myFinalCoordinate = myMinusHighestCoordinate;
+            } else if (schema['score'] > 2000) {
+                //检查我的差一步胜利
+                if (find.length > 0) {
+                    yourAlmostWinCoordinate.push(find);
+                }
+            } else if (schema['score'] > 1000) {
+                if (find.length > 0) {
+                    yourMustCareCoordinate.push(find);
+                }
             }
-            console.log('yourAlmostWin', yourAlmostWinCoordinate);
-            console.log('yourMustCare', yourMustCareCoordinate);
-            console.log('myFinalCoordinate', myFinalCoordinate, chessboard.getDomByCoordinate(myFinalCoordinate));
-            return myFinalCoordinate;
-        };
-
-        chessboard.go(calculate(matrix, this.color), this.color);
+        });
+        if (myWinCoordinate.length > 0) {
+            console.log('choose my win');
+            myFinalCoordinate = myWinCoordinate[0];
+        } else if (yourAlmostWinCoordinate.length > 0) {
+            console.log('choose your almost');
+            myFinalCoordinate = yourLowestCoordinate;
+        } else if (myMustWinCoordinate.length > 0) {
+            console.log('choose my must win');
+            myFinalCoordinate = myMustWinCoordinate[0];
+        } else if (myAlmostWinCoordinate.length > 0) {
+            console.log('choose my almost');
+            myFinalCoordinate = myHighestCoordinate;
+        } else if (yourMustCareCoordinate.length > 0) {
+            console.log('choose your muse care');
+            myFinalCoordinate = yourLowestCoordinate;
+        } else if (myMinusHighestScore == 0) {
+            console.log('choose my best');
+            myFinalCoordinate = myBestCoordinate;
+        } else {
+            console.log('choose my minus');
+            myFinalCoordinate = myMinusHighestCoordinate;
+        }
+        console.log('yourAlmostWin', yourAlmostWinCoordinate);
+        console.log('yourMustCare', yourMustCareCoordinate);
+        console.log('myFinalCoordinate', myFinalCoordinate, chessboard.getDomByCoordinate(myFinalCoordinate));
+        chessboard.go(myFinalCoordinate, this.color);
+        if (myWinCoordinate.length > 0) {
+            chessboard.showWinner(this.color);
+        } else if (yourWinCoordinate.length > 0) {
+            chessboard.showWinner(this.color == 'black' ? 'white' : 'black');
+        }
     }
     return this;
 };
