@@ -67,10 +67,6 @@ Matrix.prototype.cacheCoordinatesByValue = function () {
     this._coordinatesCache = this.getCoordinatesByValue(1);
 };
 
-Matrix.prototype.clearCoordinatesCache = function () {
-    this._coordinatesCache = null;
-};
-
 /**
  * @param {Array} schema
  * @return {Array}
@@ -137,14 +133,6 @@ Matrix.prototype.copy = function (interchange) {
         }
     }
     return matrix;
-};
-
-/**
- * 取得矩阵的大小
- * @return {Number}
- */
-Matrix.prototype.getSize = function () {
-    return this.size;
 };
 
 Matrix.prototype.shrink = function () {

@@ -94,7 +94,7 @@ Chessboard.prototype.render = function (renderTo) {
         for (var i = 0; i < size; i++) {
             html.push('<tr class="row">');
             for (var j = 0; j < size; j++) {
-                html.push('<td class="cell" data-i="' + i + '" data-j="' + j + '"></td>');
+                html.push('<td class="cell"' + 'data-i="' + i + '" data-j="' + j + '"></td>');
             }
             html.push('</tr>');
         }
