@@ -88,6 +88,7 @@ $source = array(
         'direction' => 8,
     ),
 );
+echo json_encode($source);
 
 class Schema
 {
