@@ -5,7 +5,6 @@
  * Time: 下午10:42
  */
 jQuery(function () {
-    window.findSchemaCount = 0;
     window.schemas = new Schema().compile(Schema.source);
     var person = new Person();
     var ai = new Ai();
