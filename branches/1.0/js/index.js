@@ -6,6 +6,8 @@
  */
 jQuery(function () {
     window.findSchemaCount = 0;
+    window.schemas = new Schema().compile(Schema.source);
+    console.log(window.schemas);
     var person = new Person();
     var ai = new Ai();
     var chessboard = new Chessboard(15);
