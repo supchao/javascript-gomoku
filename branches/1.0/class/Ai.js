@@ -197,65 +197,6 @@ Ai.prototype.play = function (chessboard) {
             return myFinalCoordinate;
         };
 
-        //1.所有点按分数高低排序
-        //2.对所有值得继续预测的点
-        //3.模拟人走一步棋
-        //4.深度-1 值得预测的点-1 重复1
-        var changeColor = function (color) {
-            return color == 'black' ? 'white' : 'black';
-        };
-        var test = function (matrix, color, deep) {
-            if (deep == 0) {
-                return;
-            }
-            deep--;
-            var me = matrix.copy(color == 'black');
-            var shrink = matrix.shrink();
-            var i, j, temp, myScore = 0, myCurrent = 0;
-            var myScores = [];
-            schemas.forEach(function (schema) {
-                var mySchema = me.findSchema(schema['schema']);
-                myCurrent += mySchema.length * schema['score'];
-            });
-            for (i = shrink[0][0]; i < shrink[0][1]; i++) {
-                for (j = shrink[1][0]; j < shrink[1][1]; j++) {
-                    temp = me.getValueByCoordinate([i, j]);
-                    myScore = 0;
-                    if (temp === 0) {
-                        me.setValueByCoordinate([i, j], 1);
-                        schemas.forEach(function (schema) {
-                            var mySchema = me.findSchema(schema['schema']);
-                            myScore += mySchema.length * schema['score'];
-                        });
-                        me.setValueByCoordinate([i, j], 0);
-                        if (myScore - myCurrent > 0) {
-                            myScores.push({
-                                score: myScore,
-                                c: [i, j]
-                            });
-                        }
-                    }
-                }
-            }
-            myScores.sort(function (a, b) {
-                return b['score'] - a['score'];
-            });
-            console.log(myScores);
-            if (deep >= 1) {
-                myScores.forEach(function (item) {
-                    me.setValueByCoordinate(item['c'], 1);
-                    var you = calculate(me, changeColor(color));
-                    console.log(you);
-                    me.setValueByCoordinate(you, 3);
-                    test(me, color, deep);
-                    me.setValueByCoordinate(item['c'], 0);
-                    me.setValueByCoordinate(you, 0);
-                });
-            }
-        };
-        //test(matrix, this.color, 2);
-
-
         chessboard.go(calculate(matrix, this.color), this.color);
     }
     return this;
