@@ -83,6 +83,11 @@ Chessboard.prototype.go = function (coordinate, color) {
     }
 };
 
+Chessboard.prototype.showWinner = function (color) {
+    alert(color + ' win');
+    this.playing = false;
+};
+
 /**
  * 绘制棋盘
  * @param renderTo

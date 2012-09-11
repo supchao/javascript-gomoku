@@ -18,7 +18,7 @@ jQuery(function () {
     chessboard.render('#container');
 
     jQuery('#play').click(function () {
-        jQuery(this).remove();
+        jQuery(this).attr('disabled', 'disabled');
         if (jQuery('input[name="black-or-white"]:checked').val() !== 'black') {
             ai.setColor('black');
             person.setColor('white');
