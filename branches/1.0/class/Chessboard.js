@@ -39,17 +39,19 @@ var Chessboard = function (size) {
  * 点击之后马上注销点击事件，以防止多次点击
  */
 Chessboard.prototype.wait = function () {
-    var that = this;
-    var todo = function () {
-        if (that.isPlaying()) {
-            var i = jQuery(this).data('i');
-            var j = jQuery(this).data('j');
-            console.log('用户下棋', [i, j], that.getDomByCoordinate([i, j]));
-            that.el.undelegate('td', 'click', todo);
-            that.go([i, j], that.turn);
-        }
-    };
-    this.el.delegate('td', 'click', todo);
+    if (this.isPlaying()) {
+        var that = this;
+        var todo = function () {
+            if (that.isPlaying()) {
+                var i = jQuery(this).data('i');
+                var j = jQuery(this).data('j');
+                console.log('用户下棋', [i, j], that.getDomByCoordinate([i, j]));
+                that.el.undelegate('td', 'click', todo);
+                that.go([i, j], that.turn);
+            }
+        };
+        this.el.delegate('td', 'click', todo);
+    }
 };
 
 /**
@@ -71,6 +73,7 @@ Chessboard.prototype.go = function (coordinate, color) {
     });
 
     var value = (color == 'black' ? 3 : 1);
+    console.log(this.matrix.getValueByCoordinate(coordinate));
     if (this.matrix.getValueByCoordinate(coordinate) === 0) {
         this.matrix.setValueByCoordinate(coordinate, value);
         this.el.find('tr:eq(' + coordinate[0] + ')').find('td:eq(' + coordinate[1] + ')').append('<div class="pieces ' + color + '"></div>');
@@ -83,6 +86,10 @@ Chessboard.prototype.go = function (coordinate, color) {
     }
 };
 
+/**
+ * 胜利告知
+ * @param {String} color
+ */
 Chessboard.prototype.showWinner = function (color) {
     alert(color + ' win');
     this.playing = false;
@@ -116,6 +123,16 @@ Chessboard.prototype.render = function (renderTo) {
 Chessboard.prototype.start = function () {
     this.playing = true;
     this.setTurn(this.turn);
+};
+
+Chessboard.prototype.replay = function () {
+    this.playing = false;
+    this.log = [];
+    delete this.matrix;
+    this.matrix = new Matrix(this.size);
+    console.log(this.matrix);
+    this.turn = 'black';
+    this.el.find('.pieces').remove();
 };
 
 /**

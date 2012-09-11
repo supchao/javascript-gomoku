@@ -29,4 +29,9 @@ jQuery(function () {
 
         chessboard.start();
     });
+
+    jQuery('#replay').click(function () {
+        jQuery('#play').removeAttr('disabled');
+        chessboard.replay();
+    });
 });
