@@ -39,9 +39,6 @@ Matrix.prototype.getCoordinatesByValue = function (needle) {
     var i, j;
     for (i = 0; i < length; i++) {
         row = data[i];
-        if (Number(row.join('')) === 0) {
-            continue;
-        }
         for (j = 0; j < row.length; j++) {
             if (row[j] === needle) {
                 result.push([i, j]);
@@ -79,7 +76,6 @@ Matrix.prototype.clearCoordinatesCache = function () {
  * @return {Array}
  */
 Matrix.prototype.findSchema = function (schema) {
-    window.findSchemaCount++;
     var coordinates;
     if (this._coordinatesCache) {
         coordinates = this._coordinatesCache;
@@ -103,7 +99,7 @@ Matrix.prototype.findSchema = function (schema) {
             item = schema[x];
             added = [coordinate[0] + item[0], coordinate[1] + item[1]];
             temp.push(added);
-            if (data[added[0]] && data[added[0]][added[1]] !== item[2]) {
+            if (!data[added[0]] || data[added[0]][added[1]] !== item[2]) {
                 match = false;
                 break;
             }

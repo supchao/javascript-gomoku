@@ -71,6 +71,7 @@ Ai.prototype.play = function (chessboard) {
             var yourMustCareCoordinate = [];
 
 
+            console.log(shrink);
             for (i = shrink[0][0]; i < shrink[0][1]; i++) {
                 for (j = shrink[1][0]; j < shrink[1][1]; j++) {
                     temp = me.getValueByCoordinate([i, j]);
@@ -101,7 +102,7 @@ Ai.prototype.play = function (chessboard) {
                                 }
                             }
                         });
-                        me.setValueByCoordinate([i, j], temp);
+                        me.setValueByCoordinate([i, j], 0);
                         you.setValueByCoordinate([i, j], 0);
                         //我的得分已经计算
                         //计算对方得分
@@ -132,20 +133,20 @@ Ai.prototype.play = function (chessboard) {
                 }
             }
             //分析一下
-            //myScore = 0;
-            //yourScore = 0;
-            //schemas.forEach(function (schema) {
-            //    myScore += me.findSchema(schema['schema']).length * schema['score'];
-            //    yourScore += you.findSchema(schema['schema']).length * schema['score'];
-            //});
-            //console.log('当前局面 myScore', myScore);
-            //console.log('当前局面 yourScore', yourScore);
-            //console.log('myHighestScore', myHighestScore, myHighestCoordinate, chessboard.getDomByCoordinate(myHighestCoordinate));
-            //console.log('yourLowestScore', yourLowestScore, yourLowestCoordinate, chessboard.getDomByCoordinate(yourLowestCoordinate));
-            //console.log('myMinusHighestScore', myMinusHighestScore, myMinusHighestCoordinate, chessboard.getDomByCoordinate(myMinusHighestCoordinate));
-            //console.log('myWinCoordinate', myWinCoordinate);
-            //console.log('myAlmostWinCoordinate', myAlmostWinCoordinate);
-            //console.log('yourWinCoordinate', yourWinCoordinate);
+            myScore = 0;
+            yourScore = 0;
+            schemas.forEach(function (schema) {
+                myScore += me.findSchema(schema['schema']).length * schema['score'];
+                yourScore += you.findSchema(schema['schema']).length * schema['score'];
+            });
+            console.log('当前局面 myScore', myScore);
+            console.log('当前局面 yourScore', yourScore);
+            console.log('myHighestScore', myHighestScore, myHighestCoordinate, chessboard.getDomByCoordinate(myHighestCoordinate));
+            console.log('yourLowestScore', yourLowestScore, yourLowestCoordinate, chessboard.getDomByCoordinate(yourLowestCoordinate));
+            console.log('myMinusHighestScore', myMinusHighestScore, myMinusHighestCoordinate, chessboard.getDomByCoordinate(myMinusHighestCoordinate));
+            console.log('myWinCoordinate', myWinCoordinate);
+            console.log('myAlmostWinCoordinate', myAlmostWinCoordinate);
+            console.log('yourWinCoordinate', yourWinCoordinate);
             //分析结束
 
             yourScore = 0;
@@ -169,30 +170,30 @@ Ai.prototype.play = function (chessboard) {
                 }
             });
             if (myWinCoordinate.length > 0) {
-                //console.log('choose my win');
+                console.log('choose my win');
                 myFinalCoordinate = myWinCoordinate[0];
             } else if (yourAlmostWinCoordinate.length > 0) {
-                //console.log('choose your almost');
+                console.log('choose your almost');
                 myFinalCoordinate = yourLowestCoordinate;
             } else if (myMustWinCoordinate.length > 0) {
-                //console.log('choose my must win');
+                console.log('choose my must win');
                 myFinalCoordinate = myMustWinCoordinate[0];
             } else if (myAlmostWinCoordinate.length > 0) {
-                //console.log('choose my almost');
-                myFinalCoordinate = myBestCoordinate;
+                console.log('choose my almost');
+                myFinalCoordinate = myHighestCoordinate;
             } else if (yourMustCareCoordinate.length > 0) {
-                //console.log('choose your muse care');
+                console.log('choose your muse care');
                 myFinalCoordinate = yourLowestCoordinate;
             } else if (myMinusHighestScore == 0) {
-                //console.log('choose my best');
+                console.log('choose my best');
                 myFinalCoordinate = myBestCoordinate;
             } else {
-                //console.log('choose my minus');
+                console.log('choose my minus');
                 myFinalCoordinate = myMinusHighestCoordinate;
             }
-            //console.log('yourAlmostWin', yourAlmostWinCoordinate);
-            //console.log('yourMustCare', yourMustCareCoordinate);
-            //console.log('myFinalCoordinate', myFinalCoordinate, chessboard.getDomByCoordinate(myFinalCoordinate));
+            console.log('yourAlmostWin', yourAlmostWinCoordinate);
+            console.log('yourMustCare', yourMustCareCoordinate);
+            console.log('myFinalCoordinate', myFinalCoordinate, chessboard.getDomByCoordinate(myFinalCoordinate));
             return myFinalCoordinate;
         };
 
