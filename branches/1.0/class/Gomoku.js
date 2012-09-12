@@ -12,6 +12,9 @@
  * @class Gomoku
  */
 var Gomoku = function () {
+    /**
+     * @type {Chessboard}
+     */
     this.chessboard = new Chessboard(15);
     this.player1 = new Person(); //把player1当做外来棋手，现在只是人，以后可能是别人编制的AI
     this.player2 = new Ai();
