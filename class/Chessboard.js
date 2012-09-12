@@ -75,6 +75,7 @@ Chessboard.prototype.go = function (coordinate, color) {
         coordinate: coordinate,
         color: color
     });
+    jQuery('#log').append('<div><span class="log-coordinate">(' + coordinate[0] + ',' + coordinate[1] + ')</span> <span>' + color + '</span></div>');
 
     var value = (color == 'black' ? 3 : 1);
     if (this.matrix.getValueByCoordinate(coordinate) === 0) {
