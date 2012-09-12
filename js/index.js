@@ -8,6 +8,7 @@ jQuery(function () {
     window.gomoku = new Gomoku();
 
     jQuery('#play').click(function () {
+        jQuery(this).hide();
         gomoku.play(jQuery('input[name="black-or-white"]:checked').val());
     });
 

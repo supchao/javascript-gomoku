@@ -31,7 +31,6 @@ Gomoku.prototype.play = function (color) {
     //设置人和电脑执棋颜色
     this.player1.setColor(color);
     this.player2.setColor(this.changeColor(color));
-
     this.chessboard.setPlayer(this.player1);
     this.chessboard.setPlayer(this.player2);
     this.chessboard.start();
@@ -42,7 +41,7 @@ Gomoku.prototype.play = function (color) {
  * @param {String} color 外来棋手的颜色
  */
 Gomoku.prototype.replay = function (color) {
-    this.chessboard.restart();
+    this.play(color);
 };
 
 /**
