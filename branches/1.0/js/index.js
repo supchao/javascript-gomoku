@@ -7,6 +7,18 @@
 jQuery(function () {
     window.gomoku = new Gomoku();
 
+    if (!console.log) {
+        console.log = function () {};
+    }
+
+    if (!Array.prototype.forEach) {
+        Array.prototype.forEach = function (callback, thisObject) {
+            for (var i = 0; i < this.length; i++) {
+                callback.call(thisObject || null, this[i], i);
+            }
+        };
+    }
+
     jQuery('#play').click(function () {
         jQuery(this).hide();
         jQuery('#replay').show();
