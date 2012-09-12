@@ -4,7 +4,7 @@
  * Date: 12-9-5
  * Time: 下午10:42
  */
-if (!console || !console.log) {
+if (!console) {
     console = {};
     console.log = function () {};
 }
