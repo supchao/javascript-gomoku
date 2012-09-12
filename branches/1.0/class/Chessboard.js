@@ -65,7 +65,7 @@ Chessboard.prototype.doLog = function (coordinate, color) {
         coordinate: coordinate,
         color: color
     });
-    jQuery('#log').append('<div><span class="log-coordinate">(' + coordinate[0] + ',' + coordinate[1] + ')</span> <span>' + color + '</span></div>');
+    jQuery('#log').append('<div><span class="log-coordinate badge badge-info">(' + coordinate[0] + ',' + coordinate[1] + ')</span> <span>' + color + '</span></div>');
 };
 
 /**
