@@ -200,10 +200,10 @@ Ai.prototype.play = function (chessboard) {
         console.log('yourMustCare', yourMustCareCoordinate);
         console.log('myFinalCoordinate', myFinalCoordinate, chessboard.getDomByCoordinate(myFinalCoordinate));
         chessboard.go(myFinalCoordinate, this.color);
-        if (myWinCoordinate.length > 0) {
-            chessboard.showWinner(this.color);
-        } else if (yourWinCoordinate.length > 0) {
+        if (yourWinCoordinate.length > 0) {
             chessboard.showWinner(this.color == 'black' ? 'white' : 'black');
+        } else if (myWinCoordinate.length > 0) {
+            chessboard.showWinner(this.color);
         }
     }
     return this;
