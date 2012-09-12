@@ -118,7 +118,7 @@ Chessboard.prototype.render = function (renderTo) {
     jQuery(renderTo).append(this.el);
     var that = this;
     this.el.delegate('td', 'click', function () {
-        if (that.waiting) {
+        if (that.waiting && that.isPlaying()) {
             that.waiting = false;
             var i = jQuery(this).data('i');
             var j = jQuery(this).data('j');
