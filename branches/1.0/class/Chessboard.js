@@ -20,6 +20,12 @@ var Chessboard = function (size) {
      */
     this.playing = false;
 
+    /**
+     * 是否允许用户点击
+     * @type {Boolean}
+     */
+    this.waiting = false;
+
     this.turn = 'black';
 
     /**
@@ -39,19 +45,17 @@ var Chessboard = function (size) {
  * 点击之后马上注销点击事件，以防止多次点击
  */
 Chessboard.prototype.wait = function () {
-    if (this.isPlaying()) {
-        var that = this;
-        var todo = function () {
-            if (that.isPlaying()) {
-                var i = jQuery(this).data('i');
-                var j = jQuery(this).data('j');
-                console.log('用户下棋', [i, j], that.getDomByCoordinate([i, j]));
-                that.el.undelegate('td', 'click', todo);
-                that.go([i, j], that.turn);
-            }
-        };
-        this.el.delegate('td', 'click', todo);
-    }
+    this.waiting = true;
+    var that = this;
+    this.el.delegate('td', 'click', function () {
+        if (that.waiting) {
+            that.waiting = false;
+            var i = jQuery(this).data('i');
+            var j = jQuery(this).data('j');
+            console.log('用户下棋', [i, j], that.getDomByCoordinate([i, j]));
+            that.go([i, j], that.turn);
+        }
+    });
 };
 
 /**
@@ -118,19 +122,12 @@ Chessboard.prototype.render = function (renderTo) {
  * 启动对战
  */
 Chessboard.prototype.start = function () {
+    this.el.find('.pieces').remove();
     this.playing = true;
-    this.setTurn(this.turn);
-};
-
-/**
- * 重新启动对战
- */
-Chessboard.prototype.restart = function () {
-    this.playing = false;
     this.log = [];
     this.matrix = new Matrix(this.size);
     this.turn = 'black';
-    this.el.find('.pieces').remove();
+    this.setTurn(this.turn);
 };
 
 /**
