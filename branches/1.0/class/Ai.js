@@ -11,6 +11,10 @@
  * @extends Player
  */
 var Ai = function () {
+    /**
+     * @type {Array}
+     */
+    this.schemas = new Schema().compile(Schema.source);
 };
 Ai.prototype = new Player();
 
@@ -33,6 +37,7 @@ Ai.prototype.play = function (chessboard) {
         //4.对方有没有必须处置的棋(对方当前有>1000的模式)
         //5.我的最高分
 
+        var schemas = this.schemas;
         //计算我方最高分的第一步
         var matrix = chessboard.getMatrix();
         var shrink = matrix.shrink();
@@ -200,4 +205,3 @@ Ai.prototype.play = function (chessboard) {
     }
     return this;
 };
-

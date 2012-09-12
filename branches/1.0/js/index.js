@@ -5,33 +5,13 @@
  * Time: 下午10:42
  */
 jQuery(function () {
-    window.schemas = new Schema().compile(Schema.source);
-    var person = new Person();
-    var ai = new Ai();
-    var chessboard = new Chessboard(15);
-
-    //设置人和电脑执棋默认颜色
-    person.setColor('black');
-    ai.setColor('white');
-
-    //绘制棋盘
-    chessboard.render('#container');
+    window.gomoku = new Gomoku();
 
     jQuery('#play').click(function () {
-        jQuery(this).attr('disabled', 'disabled');
-        if (jQuery('input[name="black-or-white"]:checked').val() !== 'black') {
-            ai.setColor('black');
-            person.setColor('white');
-        }
-
-        chessboard.setPlayer(person);
-        chessboard.setPlayer(ai);
-
-        chessboard.start();
+        gomoku.play(jQuery('input[name="black-or-white"]:checked').val());
     });
 
     jQuery('#replay').click(function () {
-        jQuery('#play').removeAttr('disabled');
-        chessboard.replay();
+        gomoku.replay(jQuery('input[name="black-or-white"]:checked').val());
     });
 });

@@ -73,7 +73,6 @@ Chessboard.prototype.go = function (coordinate, color) {
     });
 
     var value = (color == 'black' ? 3 : 1);
-    console.log(this.matrix.getValueByCoordinate(coordinate));
     if (this.matrix.getValueByCoordinate(coordinate) === 0) {
         this.matrix.setValueByCoordinate(coordinate, value);
         this.el.find('tr:eq(' + coordinate[0] + ')').find('td:eq(' + coordinate[1] + ')').append('<div class="pieces ' + color + '"></div>');
@@ -100,20 +99,18 @@ Chessboard.prototype.showWinner = function (color) {
  * @param renderTo
  */
 Chessboard.prototype.render = function (renderTo) {
-    var makeHtml = function (size) {
-        var html = [];
-        html.push('<table class="chessboard">');
-        for (var i = 0; i < size; i++) {
-            html.push('<tr class="row">');
-            for (var j = 0; j < size; j++) {
-                html.push('<td class="cell"' + 'data-i="' + i + '" data-j="' + j + '"></td>');
-            }
-            html.push('</tr>');
+    var size = this.size;
+    var html = [];
+    html.push('<table class="chessboard">');
+    for (var i = 0; i < size; i++) {
+        html.push('<tr class="row">');
+        for (var j = 0; j < size; j++) {
+            html.push('<td class="cell"' + 'data-i="' + i + '" data-j="' + j + '"></td>');
         }
-        html.push('</table>');
-        return html.join('');
-    };
-    this.el = jQuery(makeHtml(this.size));
+        html.push('</tr>');
+    }
+    html.push('</table>');
+    this.el = jQuery(html.join(''));
     jQuery(renderTo).append(this.el);
 };
 
@@ -125,12 +122,13 @@ Chessboard.prototype.start = function () {
     this.setTurn(this.turn);
 };
 
-Chessboard.prototype.replay = function () {
+/**
+ * 重新启动对战
+ */
+Chessboard.prototype.restart = function () {
     this.playing = false;
     this.log = [];
-    delete this.matrix;
     this.matrix = new Matrix(this.size);
-    console.log(this.matrix);
     this.turn = 'black';
     this.el.find('.pieces').remove();
 };
