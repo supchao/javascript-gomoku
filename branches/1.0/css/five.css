@@ -1,6 +1,7 @@
 body {
     padding-bottom: 40px;
     padding-top: 60px;
+    min-width: 960px;
 }
 body {
     background-color: #FFFFFF;
@@ -21,7 +22,6 @@ table td {
     text-align: center;
 }
 .chessboard {
-    margin: 0 auto;
 }
 .row {
 }
@@ -48,10 +48,6 @@ table td {
     cursor: pointer;
 }
 #operation {
-    height: 430px;
-}
-#replay {
-    display: none;
 }
 #log {
     max-height: 400px;

@@ -32,22 +32,24 @@
                     <li class="active"><a href="#">Home</a></li>
                     <li><a href="">About</a></li>
                 </ul>
-            </div><!--/.nav-collapse -->
+            </div>
         </div>
     </div>
 </div>
-<div id="container" class="container-fluid">
-    <div id="operation" class="span3 alert alert-info">
-        <div class="form-inline">
-            <label class="radio"><input type="radio" name="black-or-white" value="black" checked class="radio">人执黑</label>
-            <label class="radio"><input type="radio" name="black-or-white" value="white" class="radio">人执白</label>
-            <button id="play" class="btn">开始</button>
-            <button id="replay" class="btn">重新开始</button>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span4 alert alert-info">
+            <div id="operation" class="form-inline">
+                <label class="radio"><input type="radio" name="black-or-white" value="black" checked class="radio">人执黑</label>
+                <label class="radio"><input type="radio" name="black-or-white" value="white" class="radio">人执白</label>
+                <button id="play" class="btn">开始</button>
+                <button id="replay" class="btn hide">重新开始</button>
+            </div>
+            <div id="log">
+            </div>
         </div>
-        <div id="log">
-        </div>
+        <div id="chessboard-ct" class="span8"></div>
     </div>
-    <div id="chessboard-ct" class="span9"></div>
 </div>
 </body>
 </html>
