@@ -28,7 +28,10 @@ Ai.prototype.play = function (chessboard) {
         chessboard.go([7, 7], this.color);
     } else if (chessboard.getStep() == 1) {
         var yourFirst = chessboard.getMatrix().getCoordinatesByValue(3)[0];
-        chessboard.go([yourFirst[0] - 1, yourFirst[1] - 1], this.color);
+        var myFirstI = yourFirst[0] - 1 > 0 ? yourFirst[0] - 1 : yourFirst[0] + 1;
+        var myFirstJ = yourFirst[1] - 1 > 0 ? yourFirst[1] - 1 : yourFirst[1] + 1;
+        console.log(myFirstI, myFirstJ)
+        chessboard.go([myFirstI, myFirstJ], this.color);
     } else {
         //当我下棋，检查每一个可摆放的位置
         //1.我有没有胜利的棋
