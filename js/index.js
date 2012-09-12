@@ -9,6 +9,7 @@ jQuery(function () {
 
     jQuery('#play').click(function () {
         jQuery(this).hide();
+        jQuery('#replay').show();
         gomoku.play(jQuery('input[name="black-or-white"]:checked').val());
     });
 
