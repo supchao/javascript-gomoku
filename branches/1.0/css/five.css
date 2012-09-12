@@ -43,3 +43,8 @@ table td {
 #replay {
     display: none;
 }
+#log {
+    position: fixed;
+    width: 150px;
+    border: 1px solid black;
+}
