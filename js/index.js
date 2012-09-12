@@ -4,20 +4,33 @@
  * Date: 12-9-5
  * Time: 下午10:42
  */
+if (!console.log) {
+    console.log = function () {};
+}
+
+if (!Array.prototype.forEach) {
+    Array.prototype.forEach = function (callback, thisObject) {
+        for (var i = 0; i < this.length; i++) {
+            callback.call(thisObject || null, this[i], i);
+        }
+    };
+}
+
+if (!Array.prototype.indexOf) {
+    Array.prototype.indexOf = function (searchElement, fromIndex) {
+        var findIndex = -1;
+        for (var i = fromIndex || 0; i < this.length; i++) {
+            if (this[i] === searchElement) {
+                findIndex = i;
+                break;
+            }
+        }
+        return findIndex;
+    };
+}
+
 jQuery(function () {
     window.gomoku = new Gomoku();
-
-    if (!console.log) {
-        console.log = function () {};
-    }
-
-    if (!Array.prototype.forEach) {
-        Array.prototype.forEach = function (callback, thisObject) {
-            for (var i = 0; i < this.length; i++) {
-                callback.call(thisObject || null, this[i], i);
-            }
-        };
-    }
 
     jQuery('#play').click(function () {
         jQuery(this).hide();
