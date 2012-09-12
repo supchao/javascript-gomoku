@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8"/>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="css/five.css"/>
 
     <script src="class/Gomoku.js"></script>
@@ -17,21 +18,36 @@
     <script src="js/index.js"></script>
 </head>
 <body>
-<div id="container">
-    <div id="operation">
-        <div>
-            <label>人执黑
-                <input type="radio" name="black-or-white" value="black" checked>
-            </label>
-            <label>人执白
-                <input type="radio" name="black-or-white" value="white">
-            </label>
-            <button id="play">开始</button>
-            <button id="replay">重新开始</button>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container-fluid">
+            <a data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <a href="#" class="brand">JavaScript Gomoku</a>
+            <div class="nav-collapse collapse">
+                <ul class="nav">
+                    <li class="active"><a href="#">Home</a></li>
+                    <li><a href="">About</a></li>
+                </ul>
+            </div><!--/.nav-collapse -->
         </div>
     </div>
-    <div id="log">
+</div>
+<div id="container" class="container-fluid">
+    <div id="operation" class="span3 alert alert-info">
+        <div class="form-inline">
+            <label class="radio"><input type="radio" name="black-or-white" value="black" checked class="radio">人执黑</label>
+            <label class="radio"><input type="radio" name="black-or-white" value="white" class="radio">人执白</label>
+            <button id="play" class="btn">开始</button>
+            <button id="replay" class="btn">重新开始</button>
+        </div>
+        <div id="log">
+        </div>
     </div>
+    <div id="chessboard-ct" class="span9"></div>
 </div>
 </body>
 </html>

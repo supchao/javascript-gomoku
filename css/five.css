@@ -1,4 +1,13 @@
 body {
+    padding-bottom: 40px;
+    padding-top: 60px;
+}
+body {
+    background-color: #FFFFFF;
+    color: #333333;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 20px;
     margin: 0;
 }
 table {
@@ -35,16 +44,16 @@ table td {
 .white {
     border: 1px solid black;
 }
+.log-coordinate {
+    cursor: pointer;
+}
 #operation {
-    text-align: center;
-    height: 30px;
-    line-height: 30px;
+    height: 430px;
 }
 #replay {
     display: none;
 }
 #log {
-    position: fixed;
-    width: 150px;
-    border: 1px solid black;
+    max-height: 400px;
+    overflow: auto;
 }

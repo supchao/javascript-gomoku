@@ -7,21 +7,6 @@
 jQuery(function () {
     window.gomoku = new Gomoku();
 
-    var chessboard = jQuery('.chessboard');
-    var offset = chessboard.offset();
-    jQuery('#log').offset({
-        top: offset.top,
-        left: offset.left + chessboard.width() + 10
-    }).height(chessboard.height() - 2);
-
-    jQuery(window).resize(function () {
-        var offset = chessboard.offset();
-        jQuery('#log').offset({
-            top: offset.top,
-            left: offset.left + chessboard.width() + 10
-        });
-    });
-
     jQuery('#play').click(function () {
         jQuery(this).hide();
         jQuery('#replay').show();

@@ -20,7 +20,7 @@ var Gomoku = function () {
     this.player2 = new Ai();
 
     //绘制棋盘
-    this.chessboard.render('#container');
+    this.chessboard.render('#chessboard-ct');
 };
 
 /**
