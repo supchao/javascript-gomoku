@@ -127,6 +127,7 @@ Schema.source = [
     {"data": [0, 1, 1, 0, 1, 1, 0], "score": 3001, "direction": 4},
     {"data": [3, 1, 1, 1, 1, 0], "score": 3200, "direction": 8},
     {"data": [3, 1, 1, 1, 0, 1, 0], "score": 3001, "direction": 8},
+    {"data": [3, 1, 1, 0, 1, 1, 0], "score": 3001, "direction": 8},
     {"data": [3, 1, 1, 1, 0, 1, 3], "score": 3001, "direction": 8},
     {"data": [3, 1, 1, 0, 1, 1, 3], "score": 3001, "direction": 4},
     {"data": [0, 1, 1, 1, 0], "score": 1050, "direction": 4},
