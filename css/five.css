@@ -2,8 +2,6 @@ body {
     padding-bottom: 40px;
     padding-top: 60px;
     min-width: 960px;
-}
-body {
     background-color: #FFFFFF;
     color: #333333;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -20,10 +18,6 @@ table {
 table td {
     margin: 0;
     text-align: center;
-}
-.chessboard {
-}
-.row {
 }
 .cell {
     border: 1px solid black;
@@ -46,8 +40,6 @@ table td {
 }
 .log-coordinate {
     cursor: pointer;
-}
-#operation {
 }
 #log {
     max-height: 400px;
