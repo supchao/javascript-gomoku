@@ -132,6 +132,7 @@ Chessboard.prototype.render = function (renderTo) {
  */
 Chessboard.prototype.start = function () {
     this.el.find('.pieces').remove();
+    jQuery('#log').empty();
     this.playing = true;
     this.log = [];
     this.matrix = new Matrix(this.size);
