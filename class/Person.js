@@ -18,7 +18,6 @@ Person.prototype = new Player();
  * @return {Person}
  */
 Person.prototype.play = function (chessboard) {
-    console.log('等待用户下棋');
     chessboard.wait();
     return this;
 };
