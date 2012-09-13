@@ -96,6 +96,17 @@ Chessboard.prototype.go = function (coordinate, color) {
 Chessboard.prototype.showWinner = function (color) {
     alert(color + ' win');
     this.playing = false;
+    if (typeof JSON.stringify !== 'undefined') {
+        jQuery.ajax({
+            url: 'data/log.php',
+            type: 'POST',
+            data: {
+                log: JSON.stringify(this.log)
+            },
+            success: function () {
+            }
+        });
+    }
 };
 
 /**
