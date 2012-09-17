@@ -30,7 +30,6 @@ Ai.prototype.play = function (chessboard) {
         var yourFirst = chessboard.getMatrix().getCoordinatesByValue(3)[0];
         var myFirstI = yourFirst[0] - 1 > 0 ? yourFirst[0] - 1 : yourFirst[0] + 1;
         var myFirstJ = yourFirst[1] - 1 > 0 ? yourFirst[1] - 1 : yourFirst[1] + 1;
-        console.log(myFirstI, myFirstJ)
         chessboard.go([myFirstI, myFirstJ], this.color);
     } else {
         //当我下棋，检查每一个可摆放的位置
