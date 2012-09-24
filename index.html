@@ -41,12 +41,27 @@
 <div class="container-fluid">
     <div class="row-fluid">
         <div class="span4 alert alert-info">
-            <div id="operation" class="form-inline">
-                <label class="radio"><input type="radio" name="black-or-white" value="black" checked class="radio">人执黑</label>
-                <label class="radio"><input type="radio" name="black-or-white" value="white" class="radio">人执白</label>
-                <button id="play" class="btn">开始</button>
-                <button id="replay" class="btn hide">重新开始</button>
-            </div>
+            <form class="form">
+                <div style="margin-bottom: 5px;">
+                    <label class="radio inline">
+                        <input type="radio" name="black-or-white" value="black" checked> 挑战者执黑
+                    </label>
+                    <label class="radio inline">
+                        <input type="radio" name="black-or-white" value="white"> 挑战者执白
+                    </label>
+                </div>
+                <div id="operation" class="form-inline">
+                    <label for="mode">
+                        <select id="mode">
+                            <option value="1">人机对战</option>
+                            <option value="2">代码PK</option>
+                        </select>
+                    </label>
+                    <button id="play" class="btn">开始</button>
+                    <button id="replay" class="btn hide">重新开始</button>
+                </div>
+                <label for="code" class="hide"><textarea id="code" class="span12" rows="10"></textarea></label>
+            </form>
             <div id="log">
             </div>
         </div>
