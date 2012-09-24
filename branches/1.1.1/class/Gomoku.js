@@ -11,12 +11,16 @@
  * @constructor
  * @class Gomoku
  */
-var Gomoku = function () {
+var Gomoku = function (challenger) {
     /**
      * @type {Chessboard}
      */
     this.chessboard = new Chessboard(15);
-    this.player1 = new Person(); //把player1当做外来棋手，现在只是人，以后可能是别人编制的AI
+    if (challenger) {
+        this.player1 = new challenger; //把player1当做外来棋手，现在只是人，以后可能是别人编制的AI
+    } else {
+        this.player1 = new Person(); //把player1当做外来棋手，现在只是人，以后可能是别人编制的AI
+    }
     this.player2 = new Ai();
 
     //绘制棋盘
@@ -51,4 +55,9 @@ Gomoku.prototype.replay = function (color) {
  */
 Gomoku.prototype.changeColor = function (color) {
     return color == 'black' ? 'white' : 'black';
+};
+
+Gomoku.getChallenger = function (code) {
+    var func = '(function () {' + code + '})();';
+    return eval(func);
 };

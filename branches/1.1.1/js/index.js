@@ -31,15 +31,32 @@ if (!Array.prototype.indexOf) {
 }
 
 jQuery(function () {
-    window.gomoku = new Gomoku();
 
-    jQuery('#play').click(function () {
+    jQuery('#play').click(function (e) {
+        e.preventDefault();
         jQuery(this).hide();
         jQuery('#replay').show();
-        gomoku.play(jQuery('input[name="black-or-white"]:checked').val());
+
+        if (jQuery('#mode').val() == 1) {
+            window.gomoku = new Gomoku();
+            gomoku.play(jQuery('input[name="black-or-white"]:checked').val());
+        } else {
+            var code = jQuery('#code').val();
+            window.gomoku = new Gomoku(Gomoku.getChallenger(code));
+            gomoku.play(jQuery('input[name="black-or-white"]:checked').val());
+        }
     });
 
-    jQuery('#replay').click(function () {
+    jQuery('#replay').click(function (e) {
+        e.preventDefault();
         gomoku.replay(jQuery('input[name="black-or-white"]:checked').val());
     });
+
+    jQuery('#mode').change(function () {
+        if (jQuery(this).val() == 1) {
+            jQuery('label[for=code]').hide();
+        } else {
+            jQuery('label[for=code]').show();
+        }
+    }).change();
 });

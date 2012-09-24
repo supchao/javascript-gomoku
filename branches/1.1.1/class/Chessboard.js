@@ -82,7 +82,7 @@ Chessboard.prototype.go = function (coordinate, color) {
         this.doLog(coordinate, color);
         setTimeout(function () {
             that.changeTurn();
-        }, 10);
+        }, 50);
     } else {
         alert(coordinate + ' 这个点已经有棋子了');
         this.wait();
@@ -176,8 +176,10 @@ Chessboard.prototype.setTurn = function (turn) {
  * 切换先手
  */
 Chessboard.prototype.changeTurn = function () {
-    this.turn = (this.turn == 'black' ? 'white' : 'black');
-    this.setTurn(this.turn);
+    if (this.playing) {
+        this.turn = (this.turn == 'black' ? 'white' : 'black');
+        this.setTurn(this.turn);
+    }
 };
 
 /**

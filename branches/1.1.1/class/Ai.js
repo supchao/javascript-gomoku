@@ -199,6 +199,8 @@ Ai.prototype.play = function (chessboard) {
         console.log('yourMustCare', yourMustCareCoordinate);
         console.log('myFinalCoordinate', myFinalCoordinate, chessboard.getDomByCoordinate(myFinalCoordinate));
         chessboard.go(myFinalCoordinate, this.color);
+
+        //TODO 胜利检测在这里是错误的
         if (yourWinCoordinate.length > 0) {
             chessboard.showWinner(this.color == 'black' ? 'white' : 'black');
         } else if (myWinCoordinate.length > 0) {
