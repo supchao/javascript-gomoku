@@ -60,6 +60,7 @@ Gomoku.prototype.changeColor = function (color) {
 Gomoku.getChallenger = function (code) {
     var func = '' +
         '(function () {' +
+        '    window = {};' +
         '    var Challenger = function () {}; ' +
         '    Challenger.prototype = new Player(); ' +
         '    Challenger.prototype.play = function (chessboard) {' +
