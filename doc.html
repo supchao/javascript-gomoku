@@ -17,7 +17,6 @@
     <script src="class/Chessboard.js"></script>
     <script src="js/jquery-1.8.1.min.js"></script>
     <script src="js/index.js"></script>
-    <script src="data/logs.js"></script>
 </head>
 <body>
 <div class="navbar navbar-inverse navbar-fixed-top">
@@ -31,8 +30,8 @@
             <a href="#" class="brand">JavaScript Gomoku 五子棋</a>
             <div class="nav-collapse collapse">
                 <ul class="nav">
-                    <li class="active"><a href="">Home</a></li>
-                    <li class=""><a href="">代码PK</a></li>
+                    <li class=""><a href="index.html">Home</a></li>
+                    <li class="active"><a href="doc.html">代码PK</a></li>
                     <li><a href="http://code.google.com/p/javascript-gomoku/">About</a></li>
                 </ul>
             </div>
@@ -41,32 +40,6 @@
 </div>
 <div class="container-fluid">
     <div class="row-fluid">
-        <div class="span4 alert alert-info">
-            <form class="form">
-                <div style="margin-bottom: 5px;">
-                    <label class="radio inline">
-                        <input type="radio" name="black-or-white" value="black" checked> 挑战者执黑
-                    </label>
-                    <label class="radio inline">
-                        <input type="radio" name="black-or-white" value="white"> 挑战者执白
-                    </label>
-                </div>
-                <div id="operation" class="form-inline">
-                    <label for="mode">
-                        <select id="mode">
-                            <option value="1">人机对战</option>
-                            <option value="2">代码PK</option>
-                        </select>
-                    </label>
-                    <button id="play" class="btn">开始</button>
-                    <button id="replay" class="btn hide">重新开始</button>
-                </div>
-                <label for="code" class="hide"><textarea id="code" class="span12" rows="10"></textarea></label>
-            </form>
-            <div id="log">
-            </div>
-        </div>
-        <div id="chessboard-ct" class="span8"></div>
     </div>
 </div>
 </body>

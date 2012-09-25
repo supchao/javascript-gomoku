@@ -58,6 +58,14 @@ Gomoku.prototype.changeColor = function (color) {
 };
 
 Gomoku.getChallenger = function (code) {
-    var func = '(function () {' + code + '})();';
+    var func = '' +
+        '(function () {' +
+        '    var Challenger = function () {}; ' +
+        '    Challenger.prototype = new Player(); ' +
+        '    Challenger.prototype.play = function (chessboard) {' +
+        code +
+        '    };' +
+        '    return Challenger;' +
+        '})();';
     return eval(func);
 };
