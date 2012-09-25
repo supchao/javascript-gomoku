@@ -27,7 +27,7 @@ var Matrix = function (size) {
 };
 
 /**
- * 获得此矩阵内所有为needle的坐标
+ * 获得此矩阵内所有值为needle的坐标
  * @param needle
  * @return {Array}
  */
@@ -133,6 +133,27 @@ Matrix.prototype.copy = function (interchange) {
         }
     }
     return matrix;
+};
+
+/**
+ * 转换matrix成array
+ * @return {Array}
+ */
+Matrix.prototype.toArray = function () {
+    var retArray = [];
+    var rowArray;
+    var length = this.data.length;
+    var data = this.data;
+    var i, j;
+
+    for (i = 0; i < length; i++) {
+        rowArray = [];
+        for (j = 0; j < data[i].length; j++) {
+            rowArray.push(data[i][j]);
+        }
+        retArray.push(rowArray);
+    }
+    return retArray;
 };
 
 Matrix.prototype.shrink = function () {
